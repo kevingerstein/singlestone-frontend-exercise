@@ -10,6 +10,7 @@ export default {
   },
   components: {},
   created: function () {
+    //grab data from api, sort by step, then adjust content
     axios
       .get("https://uqnzta2geb.execute-api.us-east-1.amazonaws.com/default/FrontEndCodeChallenge")
       .then((response) => {
@@ -22,6 +23,7 @@ export default {
       });
   },
   methods: {
+    //grabs only the single most up to date content
     upToDateContent: function () {
       this.steps.forEach((step) => {
         let recentContent = step.versionContent[0];
@@ -33,6 +35,7 @@ export default {
         step.versionContent = recentContent;
       });
     },
+    //formats step numbers < 10 to add a 0 in front
     formattedStepNumber: function (stepNumber) {
       if (stepNumber < 10) {
         return "0" + stepNumber;
